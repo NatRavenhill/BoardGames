@@ -1,0 +1,48 @@
+﻿@model AddGameViewModel
+@{
+    ViewData["Title"] = "Add Game";
+}
+
+<link rel="stylesheet" href="~/css/addGame.css" type="text/css" />
+
+<div class="row">
+    <div class="col-sm-9">
+        <h1>@ViewData["Title"]</h1>
+    </div>
+    <div class="col-sm-3">
+        <form asp-controller="AddGame" asp-action="AddGame" method="get">
+            <input type="text" name="searchText" placeholder="Enter search text" />
+            <button type="submit">Search</button>
+        </form>
+    </div>
+</div>
+
+@if(Model.BoardGames.Count() == 0)
+{
+    <p>No games found. Search for some games and results will be displayed here</p>
+}
+
+
+@if (Model != null && Model.BoardGames.Count() > 0)
+{
+    <h2>Results</h2>
+    <ul class="list-group">
+        @foreach (var game in Model.BoardGames)
+        {
+            <li class="list-group-item">
+                <h3>
+                    <a asp-controller="AddGame" asp-action="GameDetail"
+                       asp-route-id="@game.ObjectId"
+                       asp-route-isAdded="false">@game.Name</a>
+                </h3>
+                <p>@game.YearPublished</p>
+                <button type="button" class="btn"
+                        onclick=location.href ="@Url.Action("AddToDatabase", "AddGame", new { id = game.ObjectId })">
+                    ADD GAME
+                </button>
+            </li>
+        }
+    </ul>
+}
+
+

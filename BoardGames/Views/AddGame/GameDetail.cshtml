@@ -1,0 +1,41 @@
+﻿@model GameDetailViewModel
+@{
+    ViewData["Title"] = "Game Detail";
+}
+
+@{
+    if (Model.Added)
+    {
+        <div class="alert alert-success" role="alert">
+            <p>@Model.Item.Name.Value was successfully added to the database!</p>
+        </div>
+    }
+}
+
+<h1>@Model.Item.Name.Value</h1>
+
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-4">
+            <img src="@Model.Item.ImageUrl" class="responsive" />
+        </div>
+
+        <div class="col-8">
+            <p>@Model.Item.Description</p>
+
+            <p><span style="font-weight:bold">Year published:</span> @Model.Item.YearPublished.Value</p>
+
+            <p><span style="font-weight:bold">Min players:</span> @Model.Item.MinPlayers.Value</p>
+
+            <p><span style="font-weight:bold">Max players:</span> @Model.Item.MaxPlayers.Value</p>
+
+            <p><span style="font-weight:bold">Playing time:</span> @Model.Item.PlayingTime.Value</p>
+
+            <a href="https://boardgamegeek.com/boardgame/@Model.Item.ID">Link to profile on BoardGameGeek</a>
+        </div>
+    </div>
+    
+</div>
+

@@ -1,0 +1,30 @@
+﻿#gamesCarousel {
+    height: 60vh;
+    background-color: var(--darkcolor);
+}
+
+img {
+    height:50vh;
+    margin:auto;
+}
+
+p, h2 {
+    text-align: justify;
+}
+
+.list-group {
+    background-color: var(--color1);
+}
+
+.list-group-item {
+    background-color: var(--color1);
+    border-color: var(--color2);
+}
+
+.btn {
+    background-color: var(--color5);
+    color: var(--lightcolor);
+}
+
+
+

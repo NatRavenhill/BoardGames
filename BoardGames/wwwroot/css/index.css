@@ -1,0 +1,14 @@
+﻿#gamesCarousel {
+    height: 60vh;
+    background-color: var(--darkcolor);
+}
+
+img {
+    height:50vh;
+    margin:auto;
+}
+
+
+p, h2 {
+    text-align:justify;
+}

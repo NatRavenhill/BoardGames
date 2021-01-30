@@ -1,0 +1,13 @@
+﻿.card {
+    background-color: var(--color1);
+}
+
+.card-header {
+    border-color: var(--color2);
+}
+
+h3 {
+    color: var(--color4);
+}
+
+

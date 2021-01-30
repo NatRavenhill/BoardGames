@@ -1,0 +1,53 @@
+﻿@model BrowseLibraryViewModel
+@{
+    ViewData["Title"] = "Browse Library";
+}
+<link rel="stylesheet" href="~/css/browseLibrary.css" type="text/css" />
+<div class="row">
+    <div class="col-sm-9">
+        <h1>@ViewData["Title"]</h1>
+    </div>
+    <div class="col-sm-3">
+        <form asp-controller="BrowseLibrary" asp-action="BrowseLibrary" method="get">
+            <input type="text" name="searchText" placeholder="Enter search text" />
+            <button type="submit">Search</button>
+        </form>
+    </div>
+</div>
+
+<div class="row">
+
+    @{
+        if(Model.GameDetails.Any())
+        {
+            <div id="accordion">
+                @foreach (var game in Model.GameDetails)
+                {
+                    <div class="card">
+                        <div class="card-header" id="@($"heading{game.Id}")">
+                            <h5 class="mb-0">
+                                <button class="btn btn-link" data-toggle="collapse" data-target="@($"#collapse{game.Id}")" aria-expanded="true" aria-controls="@($"collapse{game.Id}")">
+                                    <h3>@game.Name</h3>
+                                </button>
+                            </h5>
+                        </div>
+
+                        <div id="@($"collapse{game.Id}")" class="collapse" aria-labelledby="@($"heading{game.Id}")" data-parent="#accordion">
+                            <div class="card-body">
+                                <p>@game.Description</p>
+                                <a asp-controller="AddGame" asp-action="GameDetail"
+                                   asp-route-id="@game.BBGId">More details...</a>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+        else
+        {
+            <p>No games found!</p>
+        }
+    }
+
+</div>
+
