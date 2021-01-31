@@ -17,7 +17,7 @@
     </div>
 </div>
 
-@if(Model.BoardGames.Count() == 0)
+@if(Model == null || Model.BoardGames.Count() == 0)
 {
     <p>No games found. Search for some games and results will be displayed here</p>
 }
