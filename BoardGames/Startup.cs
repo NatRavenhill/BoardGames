@@ -30,6 +30,12 @@ namespace BoardGames
             services.AddControllersWithViews();
             services.AddRazorPages();
 
+            services.AddAuthentication().AddMicrosoftAccount(microsoftOptions =>
+            {
+                microsoftOptions.ClientId = Configuration["Authentication:Microsoft:ClientId"];
+                microsoftOptions.ClientSecret = Configuration["Authentication:Microsoft:ClientSecret"];
+            });
+
             services.AddDbContext<BoardGameContext>(options => options.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=BoardGames;Trusted_Connection = True; MultipleActiveResultSets = true"));
 
             services.AddScoped<IBoardGameContext, BoardGameContext>();
