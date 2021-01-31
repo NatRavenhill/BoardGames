@@ -30,6 +30,15 @@ a {
   border-color: #1861ac;
 }
 
+.btn-link {
+    color:var(--lightcolor);
+}
+
+.btn-logout {
+    background-color:var(--color5);
+    margin-left:10px;
+}
+
 .responsive {
     width: 100%;
     max-width: 400px;

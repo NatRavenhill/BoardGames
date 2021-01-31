@@ -36,7 +36,7 @@
                        asp-route-isAdded="false">@game.Name</a>
                 </h3>
                 <p>@game.YearPublished</p>
-                <button type="button" class="btn"
+                <button type="button" class="btn-dark"
                         onclick=location.href ="@Url.Action("AddToDatabase", "AddGame", new { id = game.ObjectId })">
                     ADD GAME
                 </button>
