@@ -1,19 +1,24 @@
 ﻿@using Microsoft.AspNetCore.Authentication
 @model IList<AuthenticationScheme>
 <div>
-        <p>
-            @{
-                var microsoftLogin = Model.First(l => l.Name.Equals("Microsoft"));
-                var facebookLogin = Model.First(l => l.Name.Equals("Facebook"));
-            }
+    <p>
+        @{
+            var microsoftLogin = Model.First(l => l.Name.Equals("Microsoft"));
+            var facebookLogin = Model.First(l => l.Name.Equals("Facebook"));
+            var googleLogin = Model.First(l => l.Name.Equals("Google"));
+        }
 
-            <button type="submit" class="btn btn-primary" name="provider" value="@microsoftLogin.Name" title="Log in using your @microsoftLogin.DisplayName account">
-                <img src="/images/microsoft_48px.png" alt="Microsoft logo">
-                @microsoftLogin.DisplayName
-            </button>
-            <button type="submit" class="btn btn-primary" name="provider" value="@facebookLogin.Name" title="Log in using your @facebookLogin.DisplayName account">
-                <img src="/images/facebook_48px.png" alt="Microsoft logo">
-                @facebookLogin.DisplayName
-            </button>
-        </p>
+        <button type="submit" class="btn btn-primary" name="provider" value="@microsoftLogin.Name" title="Log in using your @microsoftLogin.DisplayName account">
+            <img src="/images/microsoft_48px.png" alt="Microsoft logo">
+            @microsoftLogin.DisplayName
+        </button>
+        <button type="submit" class="btn btn-primary" name="provider" value="@facebookLogin.Name" title="Log in using your @facebookLogin.DisplayName account">
+            <img src="/images/facebook_48px.png" alt="Microsoft logo">
+            @facebookLogin.DisplayName
+        </button>
+        <button type="submit" class="btn btn-primary" name="provider" value="@googleLogin.Name" title="Log in using your @googleLogin.DisplayName account">
+            <img src="/images/google_48px.png" alt="Microsoft logo">
+            @googleLogin.DisplayName
+        </button>
+    </p>
 </div>

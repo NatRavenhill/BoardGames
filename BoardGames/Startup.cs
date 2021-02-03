@@ -1,5 +1,7 @@
 using BoardGames.Data;
 using BoardGamesContextLib;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.Google;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -50,8 +52,39 @@ namespace BoardGames
                                 facebookOptions.AppId = Configuration["Authentication:Facebook:AppId"];
                                 facebookOptions.AppSecret = Configuration["Authentication:Facebook:AppSecret"];
                                 facebookOptions.AccessDeniedPath = "/Identity/Account/AccessDenied";
+                            })
+                            .AddGoogle(options =>
+                            {
+                                IConfigurationSection googleAuthNSection =
+                                    Configuration.GetSection("Authentication:Google");
+
+                                options.ClientId = googleAuthNSection["ClientId"];
+                                options.ClientSecret = googleAuthNSection["ClientSecret"];
                             });
         }
+
+        private void ConfigureAuthentication(IServiceCollection services)
+        {
+            services.AddAuthentication(options =>
+            {
+                options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = GoogleDefaults.AuthenticationScheme;
+            })
+                .AddMicrosoftAccount(microsoftOptions =>
+                {
+                    microsoftOptions.ClientId = Configuration["Authentication:Microsoft:ClientId"];
+                    microsoftOptions.ClientSecret = Configuration["Authentication:Microsoft:ClientSecret"];
+                })
+                .AddGoogle(options =>
+                {
+                    IConfigurationSection googleAuthNSection =
+                        Configuration.GetSection("Authentication:Google");
+
+                    options.ClientId = googleAuthNSection["ClientId"];
+                    options.ClientSecret = googleAuthNSection["ClientSecret"];
+                });
+        }
+
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
