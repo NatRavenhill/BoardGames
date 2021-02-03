@@ -30,16 +30,27 @@ namespace BoardGames
             services.AddControllersWithViews();
             services.AddRazorPages();
 
-            services.AddAuthentication().AddMicrosoftAccount(microsoftOptions =>
-            {
-                microsoftOptions.ClientId = Configuration["Authentication:Microsoft:ClientId"];
-                microsoftOptions.ClientSecret = Configuration["Authentication:Microsoft:ClientSecret"];
-            });
+            AddAuthentication(services);
 
             services.AddDbContext<BoardGameContext>(options => options.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=BoardGames;Trusted_Connection = True; MultipleActiveResultSets = true"));
-
             services.AddScoped<IBoardGameContext, BoardGameContext>();
 
+        }
+
+        private void AddAuthentication(IServiceCollection services)
+        {
+            services.AddAuthentication()
+                            .AddMicrosoftAccount(microsoftOptions =>
+                            {
+                                microsoftOptions.ClientId = Configuration["Authentication:Microsoft:ClientId"];
+                                microsoftOptions.ClientSecret = Configuration["Authentication:Microsoft:ClientSecret"];
+                            })
+                            .AddFacebook(facebookOptions =>
+                            {
+                                facebookOptions.AppId = Configuration["Authentication:Facebook:AppId"];
+                                facebookOptions.AppSecret = Configuration["Authentication:Facebook:AppSecret"];
+                                facebookOptions.AccessDeniedPath = "/Identity/Account/AccessDenied";
+                            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
