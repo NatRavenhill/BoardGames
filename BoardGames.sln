@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BoardGames", "BoardGames\Bo
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BoardGames.Tests", "BoardGames.Tests\BoardGames.Tests.csproj", "{431F4CA0-118C-4161-90D3-08C966DF9A53}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BoardGamesContextLib", "BoardGamesContextLib\BoardGamesContextLib.csproj", "{C2D66AA1-A2C5-463C-8762-69826B7B7DD3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BoardGamesContextLib", "BoardGamesContextLib\BoardGamesContextLib.csproj", "{C2D66AA1-A2C5-463C-8762-69826B7B7DD3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
