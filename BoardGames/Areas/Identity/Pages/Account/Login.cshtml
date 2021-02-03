@@ -51,24 +51,8 @@
             <hr />
             @{
                 <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
-                    <div>
-                        <p>
-                            @{
-                                var microsoftLogin = Model.ExternalLogins.First(l => l.Name.Equals("Microsoft"));
-                                var facebookLogin = Model.ExternalLogins.First(l => l.Name.Equals("Facebook"));
-                            }
-
-                            <button type="submit" class="btn btn-primary" name="provider" value="@microsoftLogin.Name" title="Log in using your @microsoftLogin.DisplayName account">
-                                <img src="/images/microsoft_48px.png" alt="Microsoft logo">
-                                @microsoftLogin.DisplayName
-                            </button>
-                            <button type="submit" class="btn btn-primary" name="provider" value="@facebookLogin.Name" title="Log in using your @facebookLogin.DisplayName account">
-                                <img src="/images/facebook_48px.png" alt="Microsoft logo">
-                                @facebookLogin.DisplayName
-                            </button>
-                        </p>
-                    </div>
-                 </form>
+                        <partial name="_LoginButtons" model="Model.ExternalLogins" />
+                </form>
             }
         </section>
     </div>
