@@ -2,6 +2,7 @@
 using BoardGames.Models.API;
 using BoardGames.Models.Extensions;
 using BoardGamesContextLib;
+using BoardGamesContextLib.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
@@ -14,7 +15,6 @@ namespace BoardGames.Controllers
     /// <summary>
     /// Controller for the Add Game page
     /// </summary>
-    [Authorize]
     public class AddGameController : Controller
     {
         private IBoardGameContext db;
@@ -75,8 +75,13 @@ namespace BoardGames.Controllers
             var gameDetailVm = new GameDetailViewModel()
             {
                 Item = foundGame.Result,
-                Added = isAdded
+                Added = isAdded,
+                IsLoggedIn = HttpContext?.User.Identity.IsAuthenticated ?? false
             };
+
+            GameDetail game = db.GameDetail.FirstOrDefault(g => g.BBGId == id);
+            if (game != null)
+                gameDetailVm.Loans = db.Loan.Where(l => l.GameID == game.Id);
 
             return View(gameDetailVm);
         }
@@ -88,6 +93,7 @@ namespace BoardGames.Controllers
         /// </summary>
         /// <param name="id">Id of game to retrieve</param>
         /// <returns>The game detail view</returns>
+        [Authorize]
         public IActionResult AddToDatabase(int id)
         {
             Item foundGame = GetGameDetail(id).Result;

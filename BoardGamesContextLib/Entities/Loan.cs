@@ -26,5 +26,10 @@ namespace BoardGamesContextLib.Entities
         /// Date the game was borrowed
         /// </summary>
         public DateTime BorrowedDate { get; set; }
+
+        /// <summary>
+        /// Date the game was returned
+        /// </summary>
+        public DateTime? ReturnedDate { get; set; }
     }
 }

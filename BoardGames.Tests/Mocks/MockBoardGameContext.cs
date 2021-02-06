@@ -13,11 +13,19 @@ namespace BoardGames.Tests.Mocks
     {
         public MockBoardGameContext()
         {
+            SetupGameDetails();
+            SetupLoans();
+            Setup(x => x.SaveChanges()).Returns(1);
+        }
+
+        private void SetupGameDetails()
+        {
             List<GameDetail> gameDetails = new List<GameDetail>()
             {
                 new GameDetail()
                 {
                     Id = 1,
+                    BBGId = 1,
                     Name = "Checkers",
                     Description = "Lorem ipsum dolor sit amet",
                     YearPublished = 1800,
@@ -28,6 +36,7 @@ namespace BoardGames.Tests.Mocks
                 new GameDetail()
                 {
                     Id = 2,
+                    BBGId = 2,
                     Name = "Ludo",
                     Description = "Lorem ipsum dolor sit amet",
                     YearPublished = 1800,
@@ -38,7 +47,21 @@ namespace BoardGames.Tests.Mocks
             };
             DbSet<GameDetail> games = GetQueryableMockDbSet(gameDetails);
             Setup(x => x.GameDetail).Returns(games);
-            Setup(x => x.SaveChanges()).Returns(1);
+        }
+
+        private void SetupLoans()
+        {
+            List<Loan> loanList = new List<Loan>()
+            {
+                new Loan()
+                {
+                    LoanID = 1,
+                    GameID = 1,
+                    UserID = 1
+                }
+            };
+            DbSet<Loan> loans = GetQueryableMockDbSet(loanList);
+            Setup(x => x.Loan).Returns(loans);
         }
 
         private static DbSet<T> GetQueryableMockDbSet<T>(List<T> sourceList) where T : class

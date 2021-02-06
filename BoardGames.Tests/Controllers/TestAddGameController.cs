@@ -1,16 +1,9 @@
 using BoardGames.Controllers;
 using BoardGames.Models;
-using BoardGames.Models.API;
 using BoardGames.Tests.Mocks;
-using BoardGamesContextLib;
-using BoardGamesContextLib.Entities;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Moq;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace BoardGames.Tests.Controllers
 {
@@ -122,6 +115,22 @@ namespace BoardGames.Tests.Controllers
             var item = controller.View().Model as GameDetailViewModel;
             //Assert
             Assert.AreEqual(isAdded, item.Added, $"Expected isAdded to be {isAdded}");
+        }
+
+        /// <summary>
+        /// Verifies that the Game Detail action adds loans for the given game when the game is in the database
+        /// </summary>
+        [DataRow(1, 1)]
+        [DataRow(99, 0)]
+        [TestMethod]
+        public void TestGameDetail_Loans(int id, int expectedTotal)
+        {
+            //Arrange
+            //Act
+            controller.GameDetail(id, false);
+            var item = controller.View().Model as GameDetailViewModel;
+            //Assert
+            Assert.AreEqual(expectedTotal, item.Loans.Count(), $"Expected {expectedTotal} Loans to be added for this game");
         }
 
         #endregion GameDetail
