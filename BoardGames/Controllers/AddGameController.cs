@@ -79,9 +79,9 @@ namespace BoardGames.Controllers
                 IsLoggedIn = HttpContext?.User.Identity.IsAuthenticated ?? false
             };
 
-            GameDetail game = db.GameDetail.FirstOrDefault(g => g.BBGId == id);
-            if (game != null)
-                gameDetailVm.Loans = db.Loan.Where(l => l.GameID == game.Id);
+            gameDetailVm.GameDetail = db.GameDetail.FirstOrDefault(g => g.BBGId == id);
+            if (gameDetailVm.GameDetail != null)
+                gameDetailVm.Loans = db.Loan.Where(l => l.GameID == gameDetailVm.GameDetail.Id);
 
             return View(gameDetailVm);
         }

@@ -21,6 +21,11 @@ namespace BoardGames.Models
         public Item Item { get; set; }
 
         /// <summary>
+        /// Game detail for the current board game  
+        /// </summary>
+        public GameDetail GameDetail { get; set; }
+
+        /// <summary>
         /// Is a user logged in?
         /// </summary>
         public bool IsLoggedIn { get; set; }
