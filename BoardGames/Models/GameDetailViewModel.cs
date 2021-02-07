@@ -1,7 +1,10 @@
 ﻿using BoardGames.Models.API;
 using BoardGamesContextLib.Entities;
+using Microsoft.AspNetCore.Http;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
+using System.Security.Principal;
 
 namespace BoardGames.Models
 {
@@ -26,9 +29,9 @@ namespace BoardGames.Models
         public GameDetail GameDetail { get; set; }
 
         /// <summary>
-        /// Is a user logged in?
+        /// Currently logged in user, if any
         /// </summary>
-        public bool IsLoggedIn { get; set; }
+        public ClaimsPrincipal CurrentUser { get; set; }
 
         #region Loan
 
@@ -44,6 +47,19 @@ namespace BoardGames.Models
         public bool CheckOnLoan()
         {
             return Loans?.Any(l => l.ReturnedDate == null) ?? false;
+        }
+
+        /// <summary>
+        /// Check if the current logged in user has borrowed this game
+        /// </summary>
+        /// <returns>True if borrowed by current user</returns>
+        public bool IsBorrowedByCurrentUser()
+        {
+            if (CurrentUser == null)
+                return false;
+            string userID = CurrentUser.Claims.First().Value;
+
+            return Loans.Any(l => userID.Equals(l.UserID));
         }
 
         #endregion Loan

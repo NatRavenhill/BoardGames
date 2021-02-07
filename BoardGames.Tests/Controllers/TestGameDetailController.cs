@@ -100,5 +100,38 @@ namespace BoardGames.Tests.Controllers
         }
 
         #endregion Borrow
+
+        #region Return
+
+        /// <summary>
+        /// Verifies that Return redirects to the given game's details page after completion
+        /// </summary>
+        [TestMethod]
+        public void TestReturn_Result()
+        {
+            //Arrange
+            string expectedURL = "../AddGame/GameDetail/1";
+            //Act
+            var result = controller.Return(1,1);
+            //Assert
+            Assert.AreEqual(expectedURL, (result as RedirectResult).Url, $"Expected {expectedURL}");
+        }
+
+        /// <summary>
+        /// Verifies that Returned date of loan is set to today
+        /// </summary>
+        [TestMethod]
+        public void TestReturn_ReturnedDate()
+        {
+            //Arrange
+            string expectedDate = DateTime.Today.ToShortDateString();
+            //Act
+            controller.Return(1, 1);
+            //Assert
+            Loan newLoan = controller.Database.Loan.First();
+            Assert.AreEqual(expectedDate, newLoan.ReturnedDate.Value.ToShortDateString(), $"Expected {expectedDate}");
+        }
+
+        #endregion Return
     }
 }

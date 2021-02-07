@@ -18,11 +18,16 @@
     </div>
     <div class="col-2">
         @{
-            if (Model.IsLoggedIn && Model.GameDetail != null)
+            if (Model.CurrentUser.Identity.IsAuthenticated && Model.GameDetail != null)
             {
                 if (Model.CheckOnLoan())
                 {
                     <h3><span class="badge bg-danger">On Loan</span></h3>
+                    if (Model.IsBorrowedByCurrentUser())
+                    {
+                        <button type="submit"onclick="location.href = '@Url.Action("Return", "GameDetail", new { gameID = Model.GameDetail.Id, bbgID = Model.GameDetail.BBGId })'">Return</button>
+                    }
+                        
                 }
                 else
                 {

@@ -75,7 +75,7 @@ namespace BoardGames.Controllers
             {
                 Item = foundGame.Result,
                 Added = isAdded,
-                IsLoggedIn = HttpContext?.User.Identity.IsAuthenticated ?? false
+                CurrentUser = HttpContext?.User ?? null
             };
 
             gameDetailVm.GameDetail = db.GameDetail.FirstOrDefault(g => g.BBGId == id);

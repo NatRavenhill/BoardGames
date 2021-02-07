@@ -1,7 +1,6 @@
 
 Add loans
-- let user borrow a board game (CURRENT)
-- return from details page 
+- return from details page (CURRENT)
 - let user see their loans
 - let user return a book
 

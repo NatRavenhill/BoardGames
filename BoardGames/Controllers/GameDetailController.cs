@@ -1,11 +1,9 @@
 ﻿using BoardGamesContextLib;
 using BoardGamesContextLib.Entities;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
+using System.Net;
 
 namespace BoardGames.Controllers
 {
@@ -25,7 +23,7 @@ namespace BoardGames.Controllers
         /// </summary>
         /// <param name="gameID">Id of the game to borrow</param>
         /// <param name="bbgID">Board Game Geek API ID of the game to borrow</param>
-        /// <returns></returns>
+        /// <returns>A redirect to the details page </returns>
         public IActionResult Borrow(int gameID, int bbgID)
         {
             string loggedInUser = HttpContext?.User.Claims.First().Value;
@@ -41,9 +39,31 @@ namespace BoardGames.Controllers
 
             db.Loan.Add(loan);
             
-            int result = db.SaveChanges();
+            int saveResult = db.SaveChanges();
 
-            return Redirect($"../AddGame/GameDetail/{bbgID}");
+            if (saveResult == 1)
+                return Redirect($"../AddGame/GameDetail/{bbgID}");
+            else
+                return StatusCode((int)HttpStatusCode.InternalServerError);
+        }
+
+        /// <summary>
+        /// Returns the given game if it is currently on loan
+        /// </summary>
+        /// <param name="gameID">Id of the game to borrow</param>
+        /// <param name="bbgID">Board Game Geek API ID of the game to borrow</param>
+        /// <returns>A redirect to the details page </returns>
+        public IActionResult Return(int gameID, int bbgID)
+        {
+            //find loan
+            var loan = db.Loan.First(l => l.GameID == gameID && l.ReturnedDate == null);
+            loan.ReturnedDate = DateTime.Now;
+            int saveResult = db.SaveChanges();
+
+            if(saveResult == 1)
+                return Redirect($"../AddGame/GameDetail/{bbgID}");
+            else
+                return StatusCode((int)HttpStatusCode.InternalServerError);
         }
     }
 }
