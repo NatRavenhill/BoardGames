@@ -57,7 +57,7 @@ namespace BoardGames.Tests.Mocks
                 {
                     LoanID = 1,
                     GameID = 1,
-                    UserID = 1
+                    UserID = "1"
                 }
             };
             DbSet<Loan> loans = GetQueryableMockDbSet(loanList);

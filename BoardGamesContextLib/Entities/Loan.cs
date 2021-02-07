@@ -15,7 +15,7 @@ namespace BoardGamesContextLib.Entities
         /// <summary>
         /// Id of user who is borrowing the game
         /// </summary>
-        public int UserID { get; set; }
+        public string UserID { get; set; }
 
         /// <summary>
         /// ID of game borrowed

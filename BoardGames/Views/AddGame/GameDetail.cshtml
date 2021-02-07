@@ -27,6 +27,8 @@
                 else
                 {
                     <h3><span class="badge bg-success">Available</span></h3>
+                    <button type="submit" onclick="location.href ='@Url.Action("Borrow", "GameDetail", new { gameID = Model.GameDetail.Id, bbgID = Model.GameDetail.BBGId })'">Borrow</button>                                       
+
                 }
             }
         }

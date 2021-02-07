@@ -8,7 +8,6 @@ namespace BoardGames.Controllers
 {
     public class BrowseLibraryController : Controller
     {
-
         private IBoardGameContext db;
         private BrowseLibraryViewModel model;
 

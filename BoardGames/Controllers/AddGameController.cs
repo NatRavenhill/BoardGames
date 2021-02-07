@@ -2,7 +2,6 @@
 using BoardGames.Models.API;
 using BoardGames.Models.Extensions;
 using BoardGamesContextLib;
-using BoardGamesContextLib.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;

@@ -1,14 +1,16 @@
-Add available tag to top of game detail when is its in the db
-
 
 Add loans
 - let user borrow a board game (CURRENT)
+- return from details page 
 - let user see their loans
 - let user return a book
 
 
+Decouple GameDetail from AddGame
 Fix adding multiple games with same id
+
 Add Sendgrid email sender
+
 Set up in Azure
 Write README in github
 write blog post
