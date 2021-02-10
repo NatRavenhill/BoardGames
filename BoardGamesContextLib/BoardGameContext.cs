@@ -1,5 +1,7 @@
 ﻿using BoardGamesContextLib.Entities;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.Linq;
 
 namespace BoardGamesContextLib
 {
@@ -36,5 +38,23 @@ namespace BoardGamesContextLib
         {
             base.OnModelCreating(modelBuilder);
         }
+
+        #region Loan
+
+        /// <summary>
+        /// Return a loaned game with the given ID to the library
+        /// </summary>
+        /// <param name="gameID">Game ID</param>
+        /// <returns>Save result as integer</returns>
+        public int ReturnLoan(int gameID)
+        {
+            var loan = Loan.First(l => l.GameID == gameID && l.ReturnedDate == null);
+            loan.ReturnedDate = DateTime.Now;
+            int saveResult = SaveChanges();
+            return saveResult;
+        }
+
+        #endregion Loan
+
     }
 }

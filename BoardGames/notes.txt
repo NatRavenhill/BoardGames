@@ -1,9 +1,5 @@
-
-Add loans
-- return from details page (CURRENT)
-- let user see their loans
-- let user return a book
-
+Mock loans method
+Test boardgame context
 
 Decouple GameDetail from AddGame
 Fix adding multiple games with same id

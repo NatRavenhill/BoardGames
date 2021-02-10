@@ -23,5 +23,12 @@ namespace BoardGamesContextLib
         /// </summary>
         /// <returns>Integer save change result</returns>
         int SaveChanges();
+
+        /// <summary>
+        /// Return a loaned game with the given ID to the library
+        /// </summary>
+        /// <param name="gameID">Game ID</param>
+        /// <returns>Save result as integer</returns>
+        int ReturnLoan(int gameID);
     }
 }

@@ -24,12 +24,15 @@
                     <partial name="_LoginPartial" />
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a asp-area="" asp-controller="BrowseLibrary" asp-action="BrowseLibrary">Browse</a>
+                            <a asp-controller="BrowseLibrary" asp-action="BrowseLibrary">Browse</a>
                         </li>
                         @if (SignInManager.IsSignedIn(User))
                         {
                             <li class="nav-item">
-                                <a asp-area="" asp-controller="AddGame" asp-action="AddGame">Add</a>
+                                <a asp-controller="AddGame" asp-action="AddGame">Add</a>
+                            </li>
+                            <li class="nav-item">
+                                <a asp-controller="Loans" asp-action="Index">Loans</a>
                             </li>
                         }
                     </ul>

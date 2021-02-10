@@ -16,6 +16,14 @@ namespace BoardGames.Tests.Mocks
             SetupGameDetails();
             SetupLoans();
             Setup(x => x.SaveChanges()).Returns(1);
+            Setup(x => x.ReturnLoan(It.IsAny<int>())).Returns(DoThing());
+        }
+
+        private int DoThing()
+        {
+
+            this.Object.Loan.First().ReturnedDate = DateTime.Now;
+            return 1;
         }
 
         private void SetupGameDetails()

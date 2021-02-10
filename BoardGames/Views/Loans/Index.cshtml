@@ -1,0 +1,76 @@
+﻿@model LoansViewModel
+@{
+    ViewData["Title"] = "Add Game";
+}
+@{
+
+    <h1>Loans</h1>
+
+    @if (Model.MyLoans.Any())
+    {
+
+        if (Model.CurrentLoans.Any())
+        {
+            <h2>Current Loans</h2>
+
+            <table class="table table-dark">
+                <tr class="thead-light">
+                    <th>Name</th>
+                    <th>Borrowed</th>
+                    <th></th>
+                </tr>
+
+                @{
+                    foreach (var loan in Model.CurrentLoans)
+                    {
+                        <tr>
+                            <td>@Model.GetGameNameFromID(loan.GameID)</td>
+                            <td>@loan.BorrowedDate</td>
+                            <td>
+                                <button type="submit" onclick="location.href = '@Url.Action("Return", "Loans", new { gameID = @loan.GameID })'">
+                                    Return
+                                </button>
+                            </td>
+                        </tr>
+                    }
+
+                }
+            </table>
+        }
+
+        if (Model.ReturnedLoans.Any())
+        {
+            <h2>Previous Loans</h2>
+
+            <table class="table table-dark">
+                <thead class="thead-light">
+                    <tr>
+                        <th>Name</th>
+                        <th>Borrowed</th>
+                        <th>Returned</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        foreach (var loan in Model.ReturnedLoans)
+                        {
+                            <tr>
+                                <td>@Model.GetGameNameFromID(loan.GameID)</td>
+                                <td>@loan.BorrowedDate</td>
+                                <td>@loan.ReturnedDate</td>
+                            </tr>
+                        }
+
+                    }
+                </tbody>
+
+                
+            </table>
+        }
+
+    }
+    else
+    {
+        <p>You have no loans.</p>
+    }
+}

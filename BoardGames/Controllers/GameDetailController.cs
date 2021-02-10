@@ -7,15 +7,25 @@ using System.Net;
 
 namespace BoardGames.Controllers
 {
+    /// <summary>
+    /// Controller for the game details page
+    /// </summary>
     public class GameDetailController : Controller
     {
         private IBoardGameContext db;
 
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="injectedContext">Database context</param>
         public GameDetailController(IBoardGameContext injectedContext)
         {
             db = injectedContext;
         }
 
+        /// <summary>
+        /// Database context
+        /// </summary>
         public IBoardGameContext Database => db;
 
         /// <summary>
@@ -55,12 +65,7 @@ namespace BoardGames.Controllers
         /// <returns>A redirect to the details page </returns>
         public IActionResult Return(int gameID, int bbgID)
         {
-            //find loan
-            var loan = db.Loan.First(l => l.GameID == gameID && l.ReturnedDate == null);
-            loan.ReturnedDate = DateTime.Now;
-            int saveResult = db.SaveChanges();
-
-            if(saveResult == 1)
+            if(db.ReturnLoan(gameID) == 1)
                 return Redirect($"../AddGame/GameDetail/{bbgID}");
             else
                 return StatusCode((int)HttpStatusCode.InternalServerError);

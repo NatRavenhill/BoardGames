@@ -25,7 +25,7 @@
                     <h3><span class="badge bg-danger">On Loan</span></h3>
                     if (Model.IsBorrowedByCurrentUser())
                     {
-                        <button type="submit"onclick="location.href = '@Url.Action("Return", "GameDetail", new { gameID = Model.GameDetail.Id, bbgID = Model.GameDetail.BBGId })'">Return</button>
+                        <button type="submit" onclick="location.href = '@Url.Action("Return", "GameDetail", new { gameID = Model.GameDetail.Id, bbgID = Model.GameDetail.BBGId })'">Return</button>
                     }
                         
                 }

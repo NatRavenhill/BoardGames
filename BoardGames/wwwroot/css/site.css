@@ -32,10 +32,31 @@ a {
 }
 
 .btn-link {
-    color:var(--lightcolor);
+    background-color: var(--lightcolor);
+    color: var(--darkcolor);
 }
 
-.btn-logout {
+.btn-color1 {
+    background-color: var(--color1);
+    margin-left: 10px;
+}
+
+.btn-color2 {
+    background-color: var(--color2);
+    margin-left: 10px;
+}
+
+.btn-color3 {
+    background-color: var(--color3);
+    margin-left: 10px;
+}
+
+.btn-color4 {
+    background-color: var(--color4);
+    margin-left: 10px;
+}
+
+.btn-color5 {
     background-color:var(--color5);
     margin-left:10px;
 }
@@ -105,5 +126,9 @@ nav {
 
 .col-sm-6 {
     background-color: var(--lightcolor);
+}
+
+td {
+    color:white
 }
 
