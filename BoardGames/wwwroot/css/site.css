@@ -32,32 +32,37 @@ a {
 }
 
 .btn-link {
-    background-color: var(--lightcolor);
+    background-color: transparent;
     color: var(--darkcolor);
 }
 
 .btn-color1 {
     background-color: var(--color1);
+    color: var(--lightcolor);
     margin-left: 10px;
 }
 
 .btn-color2 {
     background-color: var(--color2);
+    color: var(--lightcolor);
     margin-left: 10px;
 }
 
 .btn-color3 {
     background-color: var(--color3);
+    color: var(--lightcolor);
     margin-left: 10px;
 }
 
 .btn-color4 {
     background-color: var(--color4);
+    color: var(--lightcolor);
     margin-left: 10px;
 }
 
 .btn-color5 {
     background-color:var(--color5);
+    color:var(--lightcolor);
     margin-left:10px;
 }
 
