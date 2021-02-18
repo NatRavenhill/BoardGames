@@ -31,7 +31,7 @@ namespace BoardGames.Tests.Controllers
             var result = controller.BrowseLibrary();
             //Assert
             var model = (result as ViewResult).Model as BrowseLibraryViewModel;
-            Assert.AreEqual(2, model.GameDetails.Count(), "Expected all game details to be retured");
+            Assert.AreEqual(4, model.GameDetails.Count(), "Expected all game details to be retured");
         }
 
         /// <summary>

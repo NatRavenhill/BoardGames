@@ -120,7 +120,7 @@ namespace BoardGames.Tests.Controllers
         /// <summary>
         /// Verifies that the Game Detail action adds loans for the given game when the game is in the database
         /// </summary>
-        [DataRow(1, 1)]
+        [DataRow(1, 2)]
         [DataRow(99, 0)]
         [TestMethod]
         public void TestGameDetail_Loans(int id, int expectedTotal)

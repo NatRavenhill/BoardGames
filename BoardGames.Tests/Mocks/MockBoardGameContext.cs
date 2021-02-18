@@ -51,7 +51,29 @@ namespace BoardGames.Tests.Mocks
                     MinPlayers = 2,
                     MaxPlayers = 2,
                     PlayingTime = 20
-                }
+                },
+                new GameDetail()
+                {
+                    Id = 3,
+                    BBGId = 3,
+                    Name = "Scrabble",
+                    Description = "Lorem ipsum dolor sit amet",
+                    YearPublished = 1800,
+                    MinPlayers = 2,
+                    MaxPlayers = 4,
+                    PlayingTime = 20
+                },
+                new GameDetail()
+                {
+                    Id = 4,
+                    BBGId = 4,
+                    Name = "Monopoly",
+                    Description = "Lorem ipsum dolor sit amet",
+                    YearPublished = 1800,
+                    MinPlayers = 2,
+                    MaxPlayers = 4,
+                    PlayingTime = 20
+                },
             };
             DbSet<GameDetail> games = GetQueryableMockDbSet(gameDetails);
             Setup(x => x.GameDetail).Returns(games);
@@ -65,6 +87,18 @@ namespace BoardGames.Tests.Mocks
                 {
                     LoanID = 1,
                     GameID = 1,
+                    UserID = "1"
+                },
+                new Loan()
+                {
+                    LoanID = 2,
+                    GameID = 1,
+                    UserID = "3"
+                },
+                new Loan()
+                {
+                    LoanID = 3,
+                    GameID = 3,
                     UserID = "1"
                 }
             };

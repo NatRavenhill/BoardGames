@@ -1,8 +1,6 @@
-Mock loans method
-Test boardgame context
-
 Decouple GameDetail from AddGame
 Fix adding multiple games with same id
+Make most popular games read from loans
 
 Add Sendgrid email sender
 

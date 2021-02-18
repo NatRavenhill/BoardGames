@@ -7,7 +7,7 @@
     <h1 class="display-4">Welcome</h1>
 
     @{
-        if (Model.GameDetails.Any())
+        if (Model.MostPopularGames.Any())
         {
             <h2> Popular Games</h2>
             <p> Here are the most popular games:</p>
@@ -20,24 +20,24 @@
                 </ol>
                 <div class="carousel-inner">
                     <div class="carousel-item active">
-                        <img src="@Model.GameDetails[0].ImageLink" class="d-block" alt="...">
+                        <img src="@Model.MostPopularGames[0].ImageLink" class="d-block" alt="...">
                         <h3>
                             <a asp-controller="AddGame" asp-action="GameDetail"
-                               asp-route-id="@Model.GameDetails[0].BBGId">@Model.GameDetails[0].Name</a>
+                               asp-route-id="@Model.MostPopularGames[0].BBGId">@Model.MostPopularGames[0].Name</a>
                         </h3>
                     </div>
                     <div class="carousel-item">
-                        <img src="@Model.GameDetails[2].ImageLink" class="d-block" alt="...">
+                        <img src="@Model.MostPopularGames[1].ImageLink" class="d-block" alt="...">
                         <h3>
                             <a asp-controller="AddGame" asp-action="GameDetail"
-                               asp-route-id="@Model.GameDetails[2].BBGId">@Model.GameDetails[2].Name</a>
+                               asp-route-id="@Model.MostPopularGames[1].BBGId">@Model.MostPopularGames[1].Name</a>
                         </h3>
                     </div>
                     <div class="carousel-item">
-                        <img src="@Model.GameDetails[5].ImageLink" class="d-block" alt="...">
+                        <img src="@Model.MostPopularGames[2].ImageLink" class="d-block" alt="...">
                         <h3>
                             <a asp-controller="AddGame" asp-action="GameDetail"
-                               asp-route-id="@Model.GameDetails[5].BBGId">@Model.GameDetails[5].Name</a>
+                               asp-route-id="@Model.MostPopularGames[2].BBGId">@Model.MostPopularGames[2].Name</a>
                         </h3>
                     </div>
                 </div>

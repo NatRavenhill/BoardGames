@@ -1,7 +1,9 @@
 ﻿using BoardGames.Models;
 using BoardGamesContextLib;
+using BoardGamesContextLib.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 
@@ -22,9 +24,24 @@ namespace BoardGames.Controllers
         {
             var model = new HomeIndexViewModel()
             {
-                GameDetails = db.GameDetail.ToList()
+                MostPopularGames = GetMostPopularGames()
             };
             return View(model);
+        }
+
+        private List<GameDetail> GetMostPopularGames()
+        {
+            Dictionary<GameDetail, int> gamesWithNoLoans = new Dictionary<GameDetail, int>();
+            foreach(GameDetail game in db.GameDetail)
+            {
+                int loanTotal = db.Loan.Count(l => l.GameID == game.Id);
+                gamesWithNoLoans.Add(game, loanTotal);
+            }
+
+            IOrderedEnumerable<KeyValuePair<GameDetail, int>> orderedGames = gamesWithNoLoans.OrderByDescending(p => p.Value);
+
+            return orderedGames.Take(3).Select(p => p.Key).ToList();
+
         }
 
         #region Auto generated actions

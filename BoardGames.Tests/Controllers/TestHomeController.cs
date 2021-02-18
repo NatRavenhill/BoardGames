@@ -14,10 +14,11 @@ namespace BoardGames.Tests.Controllers
     public class TestHomeController
     {
         private HomeController controller;
+        private MockBoardGameContext mockBoardGameContext;
 
         public TestHomeController()
         {
-            var mockBoardGameContext = new MockBoardGameContext();
+            mockBoardGameContext = new MockBoardGameContext();
             controller = new HomeController(null, mockBoardGameContext.Object);
         }
 
@@ -31,7 +32,22 @@ namespace BoardGames.Tests.Controllers
             var result = controller.Index();
             //Act
             var model = (result as ViewResult).Model as HomeIndexViewModel;
-            Assert.IsTrue(model.GameDetails.Any(), "Expected some game details to be returned");
+            Assert.IsTrue(model.MostPopularGames.Any(), "Expected some game details to be returned");
+        }
+
+        /// <summary>
+        /// Verifies that the MostPopularGames are a subset of the total games
+        /// </summary>
+        [TestMethod]
+        public void TestMostPopularGames()
+        {
+            //Act
+            var result = controller.Index();
+            //Act
+            var model = (result as ViewResult).Model as HomeIndexViewModel;
+            //Assert
+            int totalGames = mockBoardGameContext.Object.GameDetail.Count();
+            Assert.IsTrue(totalGames > model.MostPopularGames.Count(), "Expected most popular games to be a subset of all games");
         }
     }
 }
