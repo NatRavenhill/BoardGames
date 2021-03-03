@@ -7,8 +7,17 @@
  The app enables users to
  * Browse the library of board games
  * Add a new game to the library
- * Search for games to add to the library using the BoardGameGeek API
+ * Search for games to add to the library using the [BoardGameGeek API](https://boardgamegeek.com/wiki/page/BGG_XML_API)
  * Loan and return games when logged into the system
+
+
+![home page](READMEImages/captured.gif)
+
+![add game](READMEImages/addGame.png)
+
+![details](READMEImages/details.png)
+
+![loans](READMEImages/loans.png)
 
 
 #### Limitations:
