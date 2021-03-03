@@ -11,7 +11,7 @@
  * Loan and return games when logged into the system
 
 
-![home page](READMEImages/captured.gif)
+![home page](READMEImages/home.png)
 
 ![add game](READMEImages/addGame.png)
 
