@@ -1,10 +1,12 @@
 using BoardGames.Data;
+using BoardGames.Email;
 using BoardGamesContextLib;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.Google;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -36,6 +38,9 @@ namespace BoardGames
 
             services.AddDbContext<BoardGameContext>(options => options.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=BoardGames;Trusted_Connection = True; MultipleActiveResultSets = true"));
             services.AddScoped<IBoardGameContext, BoardGameContext>();
+
+            services.AddTransient<IEmailSender, EmailSender>();
+            services.Configure<AuthMessageSenderOptions>(Configuration);
 
         }
 
