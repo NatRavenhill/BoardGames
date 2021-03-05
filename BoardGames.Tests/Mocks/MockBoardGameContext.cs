@@ -5,7 +5,6 @@ using Moq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace BoardGames.Tests.Mocks
 {
@@ -16,13 +15,12 @@ namespace BoardGames.Tests.Mocks
             SetupGameDetails();
             SetupLoans();
             Setup(x => x.SaveChanges()).Returns(1);
-            Setup(x => x.ReturnLoan(It.IsAny<int>())).Returns(DoThing());
+            Setup(x => x.ReturnLoan(It.IsAny<int>())).Returns(MockReturnLoan());
         }
 
-        private int DoThing()
+        private int MockReturnLoan()
         {
-
-            this.Object.Loan.First().ReturnedDate = DateTime.Now;
+            Object.Loan.First().ReturnedDate = DateTime.Now;
             return 1;
         }
 
