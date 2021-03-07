@@ -17,10 +17,5 @@ namespace BoardGames.Models
         /// Board games returned from the search
         /// </summary>
         public List<BoardGame> BoardGames { get; set; } = new List<BoardGame>();
-
-        /// <summary>
-        /// Text displayed when a new game is added to the db
-        /// </summary>
-        public string GameAddedText { get; set; } = "";
     }
 }

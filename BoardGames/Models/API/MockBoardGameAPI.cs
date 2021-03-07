@@ -34,6 +34,33 @@ namespace BoardGames.Models.API
                         MinPlayers = new ValueHolder(){ Value = "2" },
                         MaxPlayers = new ValueHolder(){ Value = "4" },
                         PlayingTime = new ValueHolder(){ Value = "20" },
+                    },
+                    new Item()
+                    {
+                        ID = 3,
+                        Name = new ValueHolder(){ Value = "Scrabble" },
+                        YearPublished = new ValueHolder(){ Value = "1948" },
+                        MinPlayers = new ValueHolder(){ Value = "2" },
+                        MaxPlayers = new ValueHolder(){ Value = "4" },
+                        PlayingTime = new ValueHolder(){ Value = "20" },
+                    },
+                    new Item()
+                    {
+                        ID = 4,
+                        Name = new ValueHolder(){ Value ="Monopoly" },
+                        YearPublished = new ValueHolder(){Value = "1800" },
+                        MinPlayers = new ValueHolder(){Value = "2" },
+                        MaxPlayers = new ValueHolder(){Value = "4" },
+                        PlayingTime = new ValueHolder(){Value = "20" }
+                    },
+                    new Item()
+                    {
+                        ID = 5,
+                        Name = new ValueHolder(){ Value ="Doble" },
+                        YearPublished = new ValueHolder(){Value = "2012" },
+                        MinPlayers = new ValueHolder(){Value = "2" },
+                        MaxPlayers = new ValueHolder(){Value = "4" },
+                        PlayingTime = new ValueHolder(){Value = "20" }
                     }
                 }
             };
@@ -64,6 +91,24 @@ namespace BoardGames.Models.API
                         ObjectId = 2,
                         Name="Ludo",
                         YearPublished=1900
+                    },
+                    new BoardGame()
+                    {
+                        ObjectId = 3,
+                        Name="Scrabble",
+                        YearPublished=1948
+                    },
+                    new BoardGame()
+                    {
+                        ObjectId = 4,
+                        Name="Monopoly",
+                        YearPublished=1800
+                    },
+                    new BoardGame()
+                    {
+                        ObjectId = 5,
+                        Name="Dobble",
+                        YearPublished=2012
                     }
                 }
             };

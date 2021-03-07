@@ -35,8 +35,9 @@ namespace BoardGames.Controllers
         /// Gets the GameDetail page for an object with the given id
         /// </summary>
         /// <param name="id">Id of game to retrieve</param>
+        /// <param name="alreadyInDatabase">Is the game already in the database?</param>
         /// <returns>The game detail view</returns>
-        public IActionResult GameDetail(int id, bool isAdded)
+        public IActionResult GameDetail(int id, bool isAdded, bool alreadyInDatabase = false)
         {
             Task<Item> foundGame = BoardGameAPIHelper.Instance.GetGameDetail(id);
 
@@ -44,7 +45,8 @@ namespace BoardGames.Controllers
             {
                 Item = foundGame.Result,
                 Added = isAdded,
-                CurrentUser = HttpContext?.User ?? null
+                CurrentUser = HttpContext?.User ?? null,
+                AlreadyInDatabase = alreadyInDatabase
             };
 
             gameDetailVm.GameDetail = db.GameDetail.FirstOrDefault(g => g.BBGId == id);

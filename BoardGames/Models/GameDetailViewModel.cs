@@ -1,10 +1,8 @@
 ﻿using BoardGames.Models.API;
 using BoardGamesContextLib.Entities;
-using Microsoft.AspNetCore.Http;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
-using System.Security.Principal;
 
 namespace BoardGames.Models
 {
@@ -17,6 +15,11 @@ namespace BoardGames.Models
         /// Has this game been added to the database
         /// </summary>
         public bool Added { get; set; }
+
+        /// <summary>
+        /// Was this game already in the database?
+        /// </summary>
+        public bool AlreadyInDatabase { get; set; }
 
         /// <summary>
         /// Item object for the current board game

@@ -4,12 +4,21 @@
 }
 
 @{
-    if (Model.Added)
-    {
-        <div class="alert alert-success" role="alert">
-            <p>@Model.Item.Name.Value was successfully added to the database!</p>
-        </div>
-    }
+        @if (Model.Added)
+        {
+            if (Model.AlreadyInDatabase)
+            {
+                <div class="alert alert-danger" role="alert">
+                    <p>@Model.Item.Name.Value is already in the database!</p>
+                </div>
+            }
+            else
+            {
+                <div class="alert alert-success" role="alert">
+                    <p>@Model.Item.Name.Value was successfully added!</p>
+                </div>
+            }
+         }
 }
 
 <div class="row">
@@ -27,12 +36,12 @@
                     {
                         <button type="submit" onclick="location.href = '@Url.Action("Return", "GameDetail", new { gameID = Model.GameDetail.Id, bbgID = Model.GameDetail.BBGId })'">Return</button>
                     }
-                        
+
                 }
                 else
                 {
                     <h3><span class="badge bg-success">Available</span></h3>
-                    <button type="submit" onclick="location.href ='@Url.Action("Borrow", "GameDetail", new { gameID = Model.GameDetail.Id, bbgID = Model.GameDetail.BBGId })'">Borrow</button>                                       
+                    <button type="submit" onclick="location.href ='@Url.Action("Borrow", "GameDetail", new { gameID = Model.GameDetail.Id, bbgID = Model.GameDetail.BBGId })'">Borrow</button>
 
                 }
             }
@@ -62,6 +71,6 @@
             <a href="https://boardgamegeek.com/boardgame/@Model.Item.ID">Link to profile on BoardGameGeek</a>
         </div>
     </div>
-    
+
 </div>
 

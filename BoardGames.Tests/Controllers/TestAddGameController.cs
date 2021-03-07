@@ -1,6 +1,7 @@
 using BoardGames.Controllers;
 using BoardGames.Models;
 using BoardGames.Tests.Mocks;
+using BoardGamesContextLib;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Linq;
@@ -15,12 +16,13 @@ namespace BoardGames.Tests.Controllers
     public class TestAddGameController
     {
         private AddGameController controller;
+        private IBoardGameContext mockBoardGameContext;
 
         public TestAddGameController()
         {
             //Arrange
-            var mockBoardGameContext = new MockBoardGameContext();
-            controller = new AddGameController(mockBoardGameContext.Object);
+            mockBoardGameContext = new MockBoardGameContext().Object;
+            controller = new AddGameController(mockBoardGameContext);
         }
 
         #region AddGame
@@ -86,17 +88,18 @@ namespace BoardGames.Tests.Controllers
         }
 
         /// <summary>
-        /// Verifies that the success text is set when a game is added
+        /// Verifies flags passed to the GameDetail controller are set correctly when a game is added
         /// </summary>
         [TestMethod]
-        public void TestAddToDatabase_SuccessText()
+        public void TestAddToDatabase_SuccessFlags()
         {
             //Arrange
             //Act
-            controller.AddToDatabase(2);
+            var result = controller.AddToDatabase(5) as RedirectToActionResult;
             //Assert
-            var viewModel = controller.Model;
-            Assert.AreEqual("Ludo was successfully added!", viewModel.GameAddedText, "Expected success text");
+            bool isAdded = (bool)result.RouteValues["isAdded"];
+            bool alreadyInDatabase = (bool)result.RouteValues["alreadyInDatabase"];
+            Assert.IsTrue(isAdded && !alreadyInDatabase, "Expected new game to be added");
         }
 
         /// <summary>
@@ -107,9 +110,39 @@ namespace BoardGames.Tests.Controllers
         {
             //Arrange
             //Act
-            var result = controller.AddToDatabase(2) as RedirectToActionResult;
+            var result = controller.AddToDatabase(5) as RedirectToActionResult;
             //Assert
             Assert.AreEqual("GameDetail", result.ActionName);
+        }
+
+        /// <summary>
+        /// Verifies that a game is not added when it is alreadty in the database
+        /// </summary>
+        [TestMethod]
+        public void TestAddToDatabase_AlreadyAdded()
+        {
+            //Arrange
+            int totalGames = mockBoardGameContext.GameDetail.Count();
+            //Act
+            var result = controller.AddToDatabase(1) as RedirectToActionResult;
+            //Assert
+            Assert.AreEqual(totalGames, mockBoardGameContext.GameDetail.Count(), "Expected no change in total board games");
+        }
+
+
+        /// <summary>
+        /// Verifies flags passed to the GameDetail controller are set correctly when a game has already been added
+        /// </summary>
+        [TestMethod]
+        public void TestAddToDatabase_AlreadyAddedFlags()
+        {
+            //Arrange
+            //Act
+            var result = controller.AddToDatabase(1) as RedirectToActionResult;
+            //Assert
+            bool isAdded = (bool)result.RouteValues["isAdded"];
+            bool alreadyInDatabase = (bool)result.RouteValues["alreadyInDatabase"];
+            Assert.IsTrue(isAdded && alreadyInDatabase, "Expected Checkers to not be added");
         }
 
         #endregion AddToDatabase
