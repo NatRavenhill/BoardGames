@@ -1,4 +1,4 @@
-Decouple GameDetail from AddGame
+
 Fix adding multiple games with same id
 
 Set up in Azure

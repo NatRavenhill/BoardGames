@@ -1,9 +1,12 @@
-﻿using BoardGamesContextLib;
+﻿using BoardGames.Models;
+using BoardGames.Models.API;
+using BoardGamesContextLib;
 using BoardGamesContextLib.Entities;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Linq;
 using System.Net;
+using System.Threading.Tasks;
 
 namespace BoardGames.Controllers
 {
@@ -27,6 +30,29 @@ namespace BoardGames.Controllers
         /// Database context
         /// </summary>
         public IBoardGameContext Database => db;
+
+        /// <summary>
+        /// Gets the GameDetail page for an object with the given id
+        /// </summary>
+        /// <param name="id">Id of game to retrieve</param>
+        /// <returns>The game detail view</returns>
+        public IActionResult GameDetail(int id, bool isAdded)
+        {
+            Task<Item> foundGame = BoardGameAPIHelper.Instance.GetGameDetail(id);
+
+            var gameDetailVm = new GameDetailViewModel()
+            {
+                Item = foundGame.Result,
+                Added = isAdded,
+                CurrentUser = HttpContext?.User ?? null
+            };
+
+            gameDetailVm.GameDetail = db.GameDetail.FirstOrDefault(g => g.BBGId == id);
+            if (gameDetailVm.GameDetail != null)
+                gameDetailVm.Loans = db.Loan.Where(l => l.GameID == gameDetailVm.GameDetail.Id);
+
+            return View(gameDetailVm);
+        }
 
         /// <summary>
         /// Add a loan for the given game to the currently logged in user

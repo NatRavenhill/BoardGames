@@ -35,7 +35,7 @@
                         <div id="@($"collapse{game.Id}")" class="collapse" aria-labelledby="@($"heading{game.Id}")" data-parent="#accordion">
                             <div class="card-body">
                                 <p>@game.Description</p>
-                                <a asp-controller="AddGame" asp-action="GameDetail"
+                                <a asp-controller="GameDetail" asp-action="GameDetail"
                                    asp-route-id="@game.BBGId">More details...</a>
                             </div>
                         </div>

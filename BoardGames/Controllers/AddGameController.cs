@@ -46,46 +46,11 @@ namespace BoardGames.Controllers
 
         private async Task<List<BoardGame>> GetData(string searchText)
         {
-            var boardGameAPI = BoardGameAPIHelper.BoardGameAPI;
+            var boardGameAPI = BoardGameAPIHelper.Instance.BoardGameAPI;
             BoardGameList boardGameList = await boardGameAPI.SearchBoardGamesAsync(searchText);
             return boardGameList.BoardGames;
 
         }
-
-        #region GameDetail
-
-        private async Task<Item> GetGameDetail(int id)
-        {
-            var boardGameAPI = BoardGameAPIHelper.BoardGameAPI;
-            ItemList resultList = await boardGameAPI.FindGameByIdAsync(id);
-            Item foundGame = resultList.Items.FirstOrDefault();
-            return foundGame;
-        }
-
-        /// <summary>
-        /// Gets the GameDetail page for an object with the given id
-        /// </summary>
-        /// <param name="id">Id of game to retrieve</param>
-        /// <returns>The game detail view</returns>
-        public IActionResult GameDetail(int id, bool isAdded)
-        {
-            Task<Item> foundGame = GetGameDetail(id);
-
-            var gameDetailVm = new GameDetailViewModel()
-            {
-                Item = foundGame.Result,
-                Added = isAdded,
-                CurrentUser = HttpContext?.User ?? null
-            };
-
-            gameDetailVm.GameDetail = db.GameDetail.FirstOrDefault(g => g.BBGId == id);
-            if (gameDetailVm.GameDetail != null)
-                gameDetailVm.Loans = db.Loan.Where(l => l.GameID == gameDetailVm.GameDetail.Id);
-
-            return View(gameDetailVm);
-        }
-
-        #endregion GameDetail
 
         /// <summary>
         /// Adds the game to the database
@@ -95,7 +60,7 @@ namespace BoardGames.Controllers
         [Authorize]
         public IActionResult AddToDatabase(int id)
         {
-            Item foundGame = GetGameDetail(id).Result;
+            Item foundGame = BoardGameAPIHelper.Instance.GetGameDetail(id).Result;
             if (foundGame == null)
                 return NotFound();
 
@@ -114,7 +79,7 @@ namespace BoardGames.Controllers
                 if(entriesWritten > 0)
                 {
                     Model.GameAddedText = $"{foundGame.Name.Value} was successfully added!";
-                    return RedirectToAction("GameDetail", new { id = id, isAdded = true });
+                    return RedirectToAction("GameDetail","GameDetail", new { id = id, isAdded = true });
 
                 }
             }
