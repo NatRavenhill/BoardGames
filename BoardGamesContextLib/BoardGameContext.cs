@@ -46,7 +46,7 @@ namespace BoardGamesContextLib
                     MinPlayers = 2,
                     MaxPlayers = 4,
                     PlayingTime = 90,
-                    ImageLink = "https://boardgamegeek.com/image/404651/scrabble",
+                    ImageLink = "https://cf.geekdo-images.com/mVmmntn2oQd0PfFrWBvwIQ__original/img/11jrKPiOVTNl5NwX83KGtTZEq40=/0x0/filters:format(jpeg)/pic404651.jpg",
                     BBGId = 320
                 }, 
                 new GameDetail()
@@ -58,7 +58,7 @@ namespace BoardGamesContextLib
                     MinPlayers = 2,
                     MaxPlayers = 4,
                     PlayingTime = 30,
-                    ImageLink = "https://boardgamegeek.com/image/646458/forbidden-island",
+                    ImageLink = "https://cf.geekdo-images.com/JgAkEBUaiHOsOS94iRMs2w__original/img/H5d4I5z_HSpPEu7EAl0DqLt9_pM=/0x0/filters:format(jpeg)/pic646458.jpg",
                     BBGId = 65244
                 });
 

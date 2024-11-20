@@ -46,17 +46,17 @@
         </section>
     </div>
     <div class="col-md-6 col-md-offset-2">
-        <section>
             @{
-                if (Model.ExternalLogins.Any()) {
-                    <h4>Use another service to log in.</h4>
-                    <hr />
-                    <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
-                        <partial name="_LoginButtons" model="Model.ExternalLogins" />
-                    </form>
+                if (Model.ExternalLogins?.Any() ?? false) {
+                    <section>
+                        <h4>Use another service to log in.</h4>
+                        <hr />
+                        <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
+                            <partial name="_LoginButtons" model="Model.ExternalLogins" />
+                        </form>
+                    </section>
                 }
             }
-        </section>
     </div>
 </div>
 
