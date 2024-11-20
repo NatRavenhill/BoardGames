@@ -29,8 +29,11 @@ namespace BoardGames
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddEntityFrameworkStores<ApplicationDbContext>();
+            services.AddDefaultIdentity<IdentityUser>(options => 
+            {
+                bool requireConfirmed = bool.Parse(Configuration["RequireConfirmedAccount"]);
+                options.SignIn.RequireConfirmedAccount = requireConfirmed;
+            }).AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
             services.AddRazorPages();
 
@@ -46,6 +49,12 @@ namespace BoardGames
 
         private void AddAuthentication(IServiceCollection services)
         {
+            bool useAuthentication = bool.Parse(Configuration["Authentication:Enabled"]);
+            if (!useAuthentication)
+            {
+                return;
+            }
+
             services.AddAuthentication()
                             .AddMicrosoftAccount(microsoftOptions =>
                             {
@@ -66,28 +75,6 @@ namespace BoardGames
                                 options.ClientId = googleAuthNSection["ClientId"];
                                 options.ClientSecret = googleAuthNSection["ClientSecret"];
                             });
-        }
-
-        private void ConfigureAuthentication(IServiceCollection services)
-        {
-            services.AddAuthentication(options =>
-            {
-                options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-                options.DefaultChallengeScheme = GoogleDefaults.AuthenticationScheme;
-            })
-                .AddMicrosoftAccount(microsoftOptions =>
-                {
-                    microsoftOptions.ClientId = Configuration["Authentication:Microsoft:ClientId"];
-                    microsoftOptions.ClientSecret = Configuration["Authentication:Microsoft:ClientSecret"];
-                })
-                .AddGoogle(options =>
-                {
-                    IConfigurationSection googleAuthNSection =
-                        Configuration.GetSection("Authentication:Google");
-
-                    options.ClientId = googleAuthNSection["ClientId"];
-                    options.ClientSecret = googleAuthNSection["ClientSecret"];
-                });
         }
 
 

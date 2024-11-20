@@ -47,12 +47,14 @@
     </div>
     <div class="col-md-6 col-md-offset-2">
         <section>
-            <h4>Use another service to log in.</h4>
-            <hr />
             @{
-                <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
+                if (Model.ExternalLogins.Any()) {
+                    <h4>Use another service to log in.</h4>
+                    <hr />
+                    <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
                         <partial name="_LoginButtons" model="Model.ExternalLogins" />
-                </form>
+                    </form>
+                }
             }
         </section>
     </div>
