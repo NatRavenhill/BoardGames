@@ -65,11 +65,9 @@ namespace BoardGames.Controllers
         public IActionResult Borrow(int gameID, int bbgID)
         {
             string loggedInUser = HttpContext?.User.Claims.First().Value;
-            int maxId = db.Loan.Any() ? db.Loan.Max(l => l.LoanID) : 0;
-
+            
             Loan loan = new Loan()
             {
-                LoanID = maxId + 1,
                 GameID = gameID,
                 UserID = loggedInUser,
                 BorrowedDate = DateTime.Now,
@@ -80,7 +78,7 @@ namespace BoardGames.Controllers
             int saveResult = db.SaveChanges();
 
             if (saveResult == 1)
-                return Redirect($"../AddGame/GameDetail/{bbgID}");
+                return Redirect($"../GameDetail/GameDetail/{bbgID}");
             else
                 return StatusCode((int)HttpStatusCode.InternalServerError);
         }
@@ -94,7 +92,7 @@ namespace BoardGames.Controllers
         public IActionResult Return(int gameID, int bbgID)
         {
             if(db.ReturnLoan(gameID) == 1)
-                return Redirect($"../AddGame/GameDetail/{bbgID}");
+                return Redirect($"../GameDetail/GameDetail/{bbgID}");
             else
                 return StatusCode((int)HttpStatusCode.InternalServerError);
         }

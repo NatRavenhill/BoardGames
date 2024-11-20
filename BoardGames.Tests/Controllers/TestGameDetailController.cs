@@ -99,26 +99,11 @@ namespace BoardGames.Tests.Controllers
         public void TestBorrow_Result()
         {
             //Arrange
-            string expectedURL = "../AddGame/GameDetail/2";
+            string expectedURL = "../GameDetail/GameDetail/2";
             //Act
             var result = controller.Borrow(2, 2);
             //Assert
             Assert.AreEqual(expectedURL, (result as RedirectResult).Url, $"Expected {expectedURL}");
-        }
-
-        /// <summary>
-        /// Verifies that ID of new loan object is max ID + 1
-        /// </summary>
-        [TestMethod]
-        public void TestBorrow_LoanID()
-        {
-            //Arrange
-            int maxID = controller.Database.Loan.Max(l => l.LoanID);
-            //Act
-            controller.Borrow(2, 2);
-            //Assert
-            Loan newLoan = controller.Database.Loan.Last();
-            Assert.AreEqual(maxID + 1, newLoan.LoanID, $"Expected ID to be {maxID + 1}");
         }
 
         /// <summary>
@@ -175,7 +160,7 @@ namespace BoardGames.Tests.Controllers
         public void TestReturn_Result()
         {
             //Arrange
-            string expectedURL = "../AddGame/GameDetail/1";
+            string expectedURL = "../GameDetail/GameDetail/1";
             //Act
             var result = controller.Return(1,1);
             //Assert
