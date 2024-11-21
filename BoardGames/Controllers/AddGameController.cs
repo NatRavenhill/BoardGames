@@ -69,25 +69,19 @@ namespace BoardGames.Controllers
 
             if (CheckNotAlreadyAdded(id))
             {
-                //set id to max + 1
-                int maxID = 0;
-                if (db.GameDetail.Any())
-                    maxID = db.GameDetail.Max(d => d.Id);
-                gameDetail.Id = maxID + 1;
-
                 var result = db.GameDetail.Add(gameDetail);
                 if (result != null || db.GameDetail.Contains(gameDetail))
                 {
                     int entriesWritten = db.SaveChanges();
                     if (entriesWritten > 0)
                     {
-                        return RedirectToAction("GameDetail", "GameDetail", new { id = id, isAdded = true, alreadyInDatabase = false });
+                        return RedirectToAction("GameDetail", "GameDetail", new { id, isAdded = true, alreadyInDatabase = false });
                     }
                 }
             }
             else
             {
-                return RedirectToAction("GameDetail", "GameDetail", new { id = id, isAdded = true, alreadyInDatabase = true });
+                return RedirectToAction("GameDetail", "GameDetail", new { id, isAdded = true, alreadyInDatabase = true });
             }
 
             return StatusCode((int)HttpStatusCode.InternalServerError);
