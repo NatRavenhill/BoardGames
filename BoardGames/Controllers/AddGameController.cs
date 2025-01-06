@@ -33,24 +33,22 @@ namespace BoardGames.Controllers
         /// <returns>The Add Game view</returns>
         public IActionResult AddGame(string searchText = "")
         {
-            if (searchText == null)
+            if (string.IsNullOrEmpty(searchText))
                 return View();
 
             Model.SearchText = searchText;
 
-            Task<List<BoardGame>> task = GetData(searchText);
+            Task<ItemList> task = GetData(searchText);
             task.Wait();
 
             Model.BoardGames = task.Result;
             return View(Model);
         }
 
-        private async Task<List<BoardGame>> GetData(string searchText)
+        private async Task<ItemList> GetData(string searchText)
         {
             var boardGameAPI = BoardGameAPIHelper.Instance.BoardGameAPI;
-            BoardGameList boardGameList = await boardGameAPI.SearchBoardGamesAsync(searchText);
-            return boardGameList.BoardGames;
-
+            return await boardGameAPI.SearchBoardGamesAsync(searchText);
         }
 
         /// <summary>

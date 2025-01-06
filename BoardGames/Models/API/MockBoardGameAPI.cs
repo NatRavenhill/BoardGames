@@ -47,20 +47,20 @@ namespace BoardGames.Models.API
                     new Item()
                     {
                         ID = 4,
-                        Name = new ValueHolder(){ Value ="Monopoly" },
-                        YearPublished = new ValueHolder(){Value = "1800" },
-                        MinPlayers = new ValueHolder(){Value = "2" },
-                        MaxPlayers = new ValueHolder(){Value = "4" },
-                        PlayingTime = new ValueHolder(){Value = "20" }
+                        Name = new ValueHolder(){ Value = "Monopoly" },
+                        YearPublished = new ValueHolder(){ Value = "1800" },
+                        MinPlayers = new ValueHolder(){ Value = "2" },
+                        MaxPlayers = new ValueHolder(){ Value = "4" },
+                        PlayingTime = new ValueHolder(){ Value = "20" }
                     },
                     new Item()
                     {
                         ID = 5,
-                        Name = new ValueHolder(){ Value ="Doble" },
-                        YearPublished = new ValueHolder(){Value = "2012" },
-                        MinPlayers = new ValueHolder(){Value = "2" },
-                        MaxPlayers = new ValueHolder(){Value = "4" },
-                        PlayingTime = new ValueHolder(){Value = "20" }
+                        Name = new ValueHolder(){ Value = "Dobble" },
+                        YearPublished = new ValueHolder(){ Value = "2012" },
+                        MinPlayers = new ValueHolder(){ Value = "2" },
+                        MaxPlayers = new ValueHolder(){ Value = "4" },
+                        PlayingTime = new ValueHolder(){ Value = "20" }
                     }
                 }
             };
@@ -74,47 +74,47 @@ namespace BoardGames.Models.API
         /// </summary>
         /// <param name="searchText">Text to search for</param>
         /// <returns>A list of board games</returns>
-        public async Task<BoardGameList> SearchBoardGamesAsync(string searchText)
+        public async Task<ItemList> SearchBoardGamesAsync(string searchText)
         {
-            var list = new BoardGameList()
+            var list = new ItemList()
             {
-                BoardGames = new List<BoardGame>()
+                Items = new List<Item>()
                 {
-                    new BoardGame()
+                    new Item()
                     {
-                        ObjectId = 1,
-                        Name="Checkers",
-                        YearPublished=1800
+                        ID = 1,
+                        Name = new ValueHolder(){ Value = "Checkers" },
+                        YearPublished = new ValueHolder(){ Value = "1800" }
                     },
-                    new BoardGame()
+                    new Item()
                     {
-                        ObjectId = 2,
-                        Name="Ludo",
-                        YearPublished=1900
+                        ID  = 2,
+                        Name = new ValueHolder(){ Value = "Ludo" },
+                        YearPublished = new ValueHolder(){ Value = "1900" }
                     },
-                    new BoardGame()
+                    new Item()
                     {
-                        ObjectId = 3,
-                        Name="Scrabble",
-                        YearPublished=1948
+                        ID = 3,
+                        Name = new ValueHolder(){ Value = "Scrabble" },
+                        YearPublished= new ValueHolder(){ Value = "1948" }
                     },
-                    new BoardGame()
+                    new Item()
                     {
-                        ObjectId = 4,
-                        Name="Monopoly",
-                        YearPublished=1800
+                        ID = 4,
+                        Name = new ValueHolder() { Value = "Monopoly" },
+                        YearPublished = new ValueHolder(){ Value = "1800" }
                     },
-                    new BoardGame()
+                    new Item()
                     {
-                        ObjectId = 5,
-                        Name="Dobble",
-                        YearPublished=2012
+                        ID = 5,
+                        Name = new ValueHolder() { Value = "Dobble" },
+                        YearPublished = new ValueHolder(){ Value = "2012" }
                     }
                 }
             };
 
-            List<BoardGame> matchingGames = list.BoardGames.Where(g => g.Name.Contains(searchText)).ToList();
-            return new BoardGameList() { BoardGames = matchingGames };
+            List<Item> matchingGames = list.Items.Where(g => g.Name.Value.Contains(searchText)).ToList();
+            return new ItemList() { Items = matchingGames };
             
 
         }

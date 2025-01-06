@@ -17,27 +17,27 @@
     </div>
 </div>
 
-@if(Model == null || Model.BoardGames.Count() == 0)
+@if(Model == null || Model.BoardGames.Items.Count() == 0)
 {
     <p>No games found. Search for some games and results will be displayed here</p>
 }
 
 
-@if (Model != null && Model.BoardGames.Count() > 0)
+@if (Model != null && Model.BoardGames.Items.Count() > 0)
 {
     <h2>Results</h2>
     <ul class="list-group">
-        @foreach (var game in Model.BoardGames)
+        @foreach (var game in Model.BoardGames.Items)
         {
             <li class="list-group-item">
                 <h3>
                     <a asp-controller="GameDetail" asp-action="GameDetail"
-                       asp-route-id="@game.ObjectId"
-                       asp-route-isAdded="false">@game.Name</a>
+                       asp-route-id="@game.ID"
+                       asp-route-isAdded="false">@game.Name.Value</a>
                 </h3>
-                <p>@game.YearPublished</p>
+                <p>@game.YearPublished.Value</p>
                 <button type="button" class="btn-dark"
-                        onclick="location.href ='@Url.Action("AddToDatabase", "AddGame", new { id = game.ObjectId })'">
+                        onclick="location.href ='@Url.Action("AddToDatabase", "AddGame", new { id = game.ID })'">
                     ADD GAME
                 </button>
             </li>

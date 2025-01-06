@@ -1,4 +1,4 @@
-﻿using BoardGames.Models.API;
+﻿ using BoardGames.Models.API;
 using BoardGamesContextLib.Entities;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,7 +24,7 @@ namespace BoardGames.Models
         /// <summary>
         /// Item object for the current board game
         /// </summary>
-        public Item Item { get; set; }
+        public Item Item { get; set; } = new Item();
 
         /// <summary>
         /// Game detail for the current board game  

@@ -13,20 +13,21 @@ namespace BoardGames.Models.API
     /// </summary>
     public class BoardGameAPI : IBoardGameAPI
     {
+        const string apiUrl = "https://www.boardgamegeek.com/xmlapi2/";
 
         /// <summary>
         /// Gets the board games with name matching the search text
         /// </summary>
         /// <param name="searchText">Text to search for</param>
         /// <returns>A list of board games</returns>
-        public async Task<BoardGameList> SearchBoardGamesAsync(string searchText)
+        public async Task<ItemList> SearchBoardGamesAsync(string searchText)
         {
             HttpClient client = new HttpClient
             {
-                BaseAddress = new Uri("https://www.boardgamegeek.com/xmlapi/")
+                BaseAddress = new Uri(apiUrl)
             };
-            string content = await GetContentAsync($"search?search={searchText}", client);
-            return XmlToObject<BoardGameList>(content);
+            string content = await GetContentAsync($"search?query={searchText}&type=boardgame", client);
+            return XmlToObject<ItemList>(content);
         }
 
         /// <summary>
@@ -38,10 +39,10 @@ namespace BoardGames.Models.API
         {
             HttpClient client = new HttpClient
             {
-                BaseAddress = new Uri("https://www.boardgamegeek.com/xmlapi2/")
+                BaseAddress = new Uri(apiUrl)
             };
 
-            string content = await GetContentAsync($"thing?type=boardgame&id={objectid}", client);
+            string content = await GetContentAsync($"thing?id={objectid}", client);
             ItemList response = XmlToObject<ItemList>(content);
             response.DecodeHtml();
             return response;

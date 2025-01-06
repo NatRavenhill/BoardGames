@@ -52,7 +52,7 @@ namespace BoardGames.Tests.Controllers
             //Assert
             var model = (result as ViewResult).Model;
             var boardGames = (model as AddGameViewModel).BoardGames;
-            Assert.IsTrue(boardGames.Any(), "Expected some board games to be found");
+            Assert.IsTrue(boardGames.Items.Any(), "Expected some board games to be found");
         }
 
         /// <summary>
@@ -67,7 +67,7 @@ namespace BoardGames.Tests.Controllers
             //Assert
             var model = (result as ViewResult).Model;
             var boardGames = (model as AddGameViewModel).BoardGames;
-            Assert.IsFalse(boardGames.Any(), "Expected no board games to be found");
+            Assert.IsFalse(boardGames.Items.Any(), "Expected no board games to be found");
         }
 
         #endregion AddGame

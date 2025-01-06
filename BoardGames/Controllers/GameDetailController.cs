@@ -49,9 +49,12 @@ namespace BoardGames.Controllers
                 AlreadyInDatabase = alreadyInDatabase
             };
 
-            gameDetailVm.GameDetail = db.GameDetail.FirstOrDefault(g => g.BBGId == id);
-            if (gameDetailVm.GameDetail != null)
-                gameDetailVm.Loans = db.Loan.Where(l => l.GameID == gameDetailVm.GameDetail.Id);
+            if (foundGame.Result != null)
+            {
+                gameDetailVm.GameDetail = db.GameDetail.FirstOrDefault(g => g.BBGId == id);
+                if (gameDetailVm.GameDetail != null)
+                    gameDetailVm.Loans = db.Loan.Where(l => l.GameID == gameDetailVm.GameDetail.Id);
+            }
 
             return View(gameDetailVm);
         }

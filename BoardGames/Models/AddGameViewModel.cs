@@ -16,6 +16,6 @@ namespace BoardGames.Models
         /// <summary>
         /// Board games returned from the search
         /// </summary>
-        public List<BoardGame> BoardGames { get; set; } = new List<BoardGame>();
+        public ItemList BoardGames { get; set; } = new ItemList();
     }
 }

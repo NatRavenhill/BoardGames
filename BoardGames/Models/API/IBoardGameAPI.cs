@@ -9,7 +9,7 @@ namespace BoardGames.Models.API
         /// </summary>
         /// <param name="searchText">Text to search for</param>
         /// <returns>A list of board games</returns>
-        public Task<BoardGameList> SearchBoardGamesAsync(string searchText);
+        public Task<ItemList> SearchBoardGamesAsync(string searchText);
 
         /// <summary>
         /// Gets the board game item list where the ids match the id parameter 
